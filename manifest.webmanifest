@@ -1,0 +1,26 @@
+{
+  "name": "Alta CRIA Campo",
+  "short_name": "Alta CRIA Campo",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#153D88",
+  "theme_color": "#153D88",
+  "description": "Registre os dados dos animais e prepare o CSV de envio para a Alta CRIA.",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "id": "./",
+  "scope": "./",
+  "lang": "pt-BR"
+}
