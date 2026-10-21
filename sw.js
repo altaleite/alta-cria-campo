@@ -1,6 +1,6 @@
 /* O cache do app não contém os dados dos animais. Eles ficam no IndexedDB. */
 const PREFIX='alta-cria-coleta-'+encodeURIComponent(self.registration.scope)+'-';
-const CACHE=PREFIX+'v2.3.0-7695afc118';
+const CACHE=PREFIX+'v2.4.0-4e2ad7fb42';
 const ARQUIVOS=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ARQUIVOS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith(PREFIX)&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
