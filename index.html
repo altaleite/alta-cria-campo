@@ -427,7 +427,7 @@ const E=[
  {id:'novilha',n:'4',t:'Novilha',s:'Registro da novilha'},
  {id:'parto',n:'5',t:'Primeiro parto',s:'O objetivo de uma boa cria'}
 ];
-const duo=id=>`<span class="duo"><img class="h" src="${ILU_IMG[id]}" alt="" width="800" height="600" loading="lazy" decoding="async"><img class="j" src="${ILU_IMG_J[id]}" alt="" width="800" height="600" loading="lazy" decoding="async"><span class="duo-tag" aria-hidden="true"><i class="th">Holandesa</i><i class="tj">Jersey</i></span></span>`;
+const duo=id=>`<span class="duo"><img class="h" src="${ILU_IMG[id]}" alt="" width="800" height="600"><img class="j" src="${ILU_IMG_J[id]}" alt="" width="800" height="600"><span class="duo-tag" aria-hidden="true"><i class="th">Holandesa</i><i class="tj">Jersey</i></span></span>`;
 E.forEach(e=>{e.svg=duo(e.id);});
 return {etapas:E,duo};
 })();
@@ -439,7 +439,7 @@ return {etapas:E,duo};
    Sem DOM: tudo aqui roda igual no navegador e em teste automatizado.
    ===================================================================== */
 
-const VERSAO_APP='2.9.10';
+const VERSAO_APP='2.9.11';
 const NOME_APP = 'Alta CRIA Campo';
 
 /* ---------- texto ---------- */
