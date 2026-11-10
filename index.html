@@ -439,7 +439,7 @@ return {etapas:E,duo};
    Sem DOM: tudo aqui roda igual no navegador e em teste automatizado.
    ===================================================================== */
 
-const VERSAO_APP='2.9.11';
+const VERSAO_APP='2.9.12';
 const NOME_APP = 'Alta CRIA Campo';
 
 /* ---------- texto ---------- */
@@ -540,7 +540,7 @@ const VOCAB = {
   evento:      ['DIARREIA','PNEUMONIA','UMBIGO INFLAMADO','TRISTEZA PARASITÁRIA','MORTE','DESCARTE']
 };
 const SINONIMOS = {
-  sangue:  { HOLANDESPO:'HOLANDES', HOLANDESA:'HOLANDES' },
+  sangue:  { HOLANDESPO:'HOLANDES', HOLANDESA:'HOLANDES', JE:'JERSEY', JERSEI:'JERSEY', JERSEYPO:'JERSEY', JERSEYPURO:'JERSEY', JERSEYPURA:'JERSEY', PUROJERSEY:'JERSEY' },
   sexo:    { F:'FÊMEA', FEM:'FÊMEA', FEMEA:'FÊMEA', M:'MACHO', MAC:'MACHO' },
   servico: { INSEMINACAO:'IA', IATF:'IA', TRANSFERENCIA:'TE', MONTA:'COBERTURA', MONTANATURAL:'COBERTURA', TOURO:'COBERTURA' },
   semen:   { CONV:'CONVENCIONAL', SEXADA:'SEXADO' },
@@ -724,7 +724,7 @@ function numeroDe(a, campo){ return num(a.c[campo]); }
    entre os dois = atenção. Padrão: Holandês/cruzas. Jersey: calibrado no
    banco de 2026 (269 Jersey puras, 28 fazendas; p1 aos 30 d = 29 kg e aos
    60 d = 43 kg; Holandês p1 = 37,5 e 50,5). */
-const LIMITES_PESO={padrao:{p30:[35,40],p60:[40,50]},JERSEY:{p30:[28,32],p60:[35,43]}};
+const LIMITES_PESO={padrao:{p30:[35,40],p60:[40,50]},JERSEY:{p30:[28,32],p60:[35,43],pDesl:45}};
 function ehJersey(a){ return norma(txt(a.c&&a.c.sangue))==='JERSEY'; }
 function limitesPeso(a,campo){ return (ehJersey(a)?LIMITES_PESO.JERSEY:LIMITES_PESO.padrao)[campo]; }
 
@@ -802,6 +802,7 @@ function validarAnimal(a, indice){
       if(f.k==='tip'){const g=a.c.refrat==='G/DL';mn=g?3:5;mx=g?9:15;un=g?'g/dL':'Brix';}
       if(n===0&&f.k!=='ordemMae'&&!(f.k==='qualidade'&&a.c.avaliacao!=='REFRATÔMETRO')){põe('erro',f.k,f.rot+': valor zero. Se não foi medido, deixe em branco.');return;}
       let dica='';if(f.k==='tip'&&((mn!=null&&n<mn)||(mx!=null&&n>mx))){const g=a.c.refrat==='G/DL';const outra=g?[5,15]:[3,9];if(n>=outra[0]&&n<=outra[1])dica=' O valor cabe na outra unidade ('+(g?'Brix':'g/dL')+'): confira se a unidade escolhida está certa.';}
+      if(f.k==='pDesl'&&ehJersey(a))mn=LIMITES_PESO.JERSEY.pDesl;
       if(f.k==='p60'||f.k==='p30'){const [lo,ok]=limitesPeso(a,f.k);mn=lo;
         if(n>=lo&&n<ok)põe('atencao',f.k,f.rot+': '+n+' kg é baixo (esperado a partir de '+ok+(ehJersey(a)?' para Jersey':'')+').'+(ehJersey(a)?'':' Pode ser bezerra pequena, como Jersey; confira a pesagem.'));}
       if(mn!=null && n<mn) põe('erro',f.k,f.rot+': '+n+(un?' '+un:'')+' está abaixo do esperado (mínimo '+mn+'). Confira a digitação.'+dica);
